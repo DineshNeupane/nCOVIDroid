@@ -1,7 +1,7 @@
 # nCOVIDroid
 Android app to track the spread of novel Corona Virus (COVID-19) in near-realtime, thanks to Johns Hopkins University : CSSEGISandData / COVID-19 
 
-[![CI Status](http://img.shields.io/travis/Pavel Katunin/DownloadButton.svg?style=flat)](https://travis-ci.org/Pavel Katunin/DownloadButton)
+<a id="raw-url" href="https://github.com/DineshNeupane/nCOVIDroid/releases/download/v1.0/ncovdroid.apk">Download FILE</a>
 
 Preview: 
 <p float="left">
