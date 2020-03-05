@@ -3,6 +3,6 @@ Android app to track the spread of novel Corona Virus (COVID-19) in near-realtim
 
 Preview: 
 <p float="left">
-  <img src="https://github.com/DineshNeupane/nCOVIDroid/blob/master/screenshots/screenshot_1.jpg" width="100" />
-  <img src="https://github.com/DineshNeupane/nCOVIDroid/blob/master/screenshots/screenshot_2.jpg" width="100" /> 
+  <img src="https://github.com/DineshNeupane/nCOVIDroid/blob/master/screenshots/screenshot_1.jpg" width="300" />
+  <img src="https://github.com/DineshNeupane/nCOVIDroid/blob/master/screenshots/screenshot_2.jpg" width="300" /> 
 </p>
