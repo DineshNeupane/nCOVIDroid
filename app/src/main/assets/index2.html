@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>nCOVID19</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <script src="https://d3js.org/d3.v4.js" charset="utf-8"></script>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .full-height {
+            height: 100%;
+            background: yellow;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+
+<div id="mapid" class="full-height"></div>
+<script>
+
+    var mymap = L.map('mapid').setView([30.7378, 112.2384], 4);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(mymap);
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var dd2 = String(today.getDate() - 1).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = mm + '-' + dd + '-' + yyyy;
+    today2 = mm + '-' + dd2 + '-' + yyyy;
+
+    var cl = [];
+    var textfile = d3.csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/" + today + ".csv", function (data) {
+        //console.log(data);
+        cl = data;
+
+        if (cl == null) {
+            var newtextFile = d3.csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/" + today2 + ".csv", function (data) {
+                cl = data;
+                executable(cl);
+            });
+        } else {
+            executable(cl);
+        }
+
+        function executable(commentlist) {
+            for (var i = 0; i < commentlist.length; i++) {
+                var lat = commentlist[i]['Latitude'];
+                var lng = commentlist[i]['Longitude'];
+                var popupText = "Province: " + commentlist[i]['Province/State'] + "<br/>" + "Country: " + commentlist[i]['Country/Region'] + "<br/>" + "Confirmed Cases: " + commentlist[i]['Confirmed'] +
+                    "<br/>" + "Total Deaths: " + commentlist[i]['Deaths'] + "<br/>" + "Recovered: " + commentlist[i]['Recovered'] + "<br/>" + "Last Update: " + commentlist[i]['Last Update'];
+
+                var markerLocation = new L.LatLng(lat, lng);
+                var marker = new L.circleMarker(markerLocation, {
+                    "fillColor": "#FF0000",
+                    "color": "#FF0000",
+                    "weight": 1,
+                    "opacity": 1
+                });
+
+                var radius = 10;
+                var radiusDeterminant = commentlist[i]['Confirmed'];
+                if (radiusDeterminant > 50000)
+                    radius = 40;
+                else if (radiusDeterminant > 10000)
+                    radius = 35;
+                else if (radiusDeterminant > 1000)
+                    radius = 25;
+                else if (radiusDeterminant > 500)
+                    radius = 15;
+                else
+                    radius = 8;
+                marker.setRadius(radius);
+                mymap.addLayer(marker);
+
+                marker.bindPopup(popupText);
+            }
+        };
+
+        // console.log(commentlist[0]['Latitude']);
+    });
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString())
+            .openOn(mymap);
+    }
+
+    mymap.on('click', onMapClick);
+
+
+</script>
+
+
+</body>
+</html>

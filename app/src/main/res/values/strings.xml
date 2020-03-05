@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">nCOVIDroid</string>
+    <string name="title_home">nCOVIDroid - Data</string>
+    <string name="title_dashboard">Info</string>
+</resources>
