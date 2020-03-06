@@ -8,3 +8,7 @@ Android app to track the spread of novel Corona Virus (COVID-19) in near-realtim
   <img src="https://github.com/DineshNeupane/nCOVIDroid/blob/master/screenshots/screenshot_1.jpg" width="400" />
   <img src="https://github.com/DineshNeupane/nCOVIDroid/blob/master/screenshots/screenshot_2.jpg" width="400" /> 
 </p>
+
+<H3>Build the Project with AS </H3>
+>Clone the repository
+>Open as existing project and build it
