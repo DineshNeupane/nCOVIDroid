@@ -13,5 +13,5 @@ Android app to track the spread of novel Corona Virus (COVID-19) in near-realtim
 >Clone the repository
 >Open as existing project and build it
 <br/>
-####Licence <br/>
+<h4>Licence</h4> <br/>
 [	GNU General Public License (GPL) 3.0](https://www.gnu.org/licenses/gpl-3.0.html)
